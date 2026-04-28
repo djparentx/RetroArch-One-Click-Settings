@@ -120,27 +120,27 @@ sleep 1
 
 # aspect_ratio_index
 # ------------------
-# 0		4:3				Standard full screen for most retro consoles.
-# 1		16:9			Modern widescreen displays.
-# 2		16:10			Common for many PC monitors and handhelds.
-# 3		16:15			Often used for NES (pixel aspect ratio).
-# 4		1:1				Perfect square.
-# 5		2:1				Extra wide.
-# 6		3:2				Native ratio for GBA and some handheld screens.
-# 7		3:4				TATE/Portrait mode for arcade games.
-# 8		4:1				Extremely wide.
-# 9		4:4				Alternative square mapping.
-# 10	5:4				Common older LCD monitor ratio.
-# 11	6:5				Alternative NES/SNES ratio.
-# 12	7:9				Vertical arcade orientation.
-# 13	8:3				Ultra-wide.
-# 14	8:7				Original pixel aspect ratio for SNES.
-# 15	19:12			Specialized widescreen variant.
-# 16	19:14			Specialized vertical variant.
-# 17	30:17			Specific wide format.
-# 18	32:9			Super ultra-wide monitors.
-# 19	10:9			Common Game Boy (DMG) ratio.
-# 20					Config	Uses the float value from video_aspect_ratio.
-# 21	1:1 PAR			Square Pixel aspect ratio.
-# 22	Core Provided	Uses the aspect ratio suggested by the emulator core.
-# 23	Custom			Allows manual sizing via custom_viewport settings.
+# 0:	4:3				Standard full screen for most retro consoles.
+# 1:	16:9			Modern widescreen displays.
+# 2:	16:10			Common for many PC monitors and handhelds.
+# 3:	16:15			Often used for NES (pixel aspect ratio).
+# 4:	1:1				Perfect square.
+# 5:	2:1				Extra wide.
+# 6:	3:2				Native ratio for GBA and some handheld screens.
+# 7:	3:4				TATE/Portrait mode for arcade games.
+# 8:	4:1				Extremely wide.
+# 9:	4:4				Alternative square mapping.
+# 10:	5:4				Common older LCD monitor ratio.
+# 11:	6:5				Alternative NES/SNES ratio.
+# 12:	7:9				Vertical arcade orientation.
+# 13:	8:3				Ultra-wide.
+# 14:	8:7				Original pixel aspect ratio for SNES.
+# 15:	19:12			Specialized widescreen variant.
+# 16:	19:14			Specialized vertical variant.
+# 17:	30:17			Specific wide format.
+# 18:	32:9			Super ultra-wide monitors.
+# 19:	10:9			Common Game Boy (DMG) ratio.
+# 20:					Config	Uses the float value from video_aspect_ratio.
+# 21:	1:1 PAR			Square Pixel aspect ratio.
+# 22:	Core Provided	Uses the aspect ratio suggested by the emulator core.
+# 23:	Custom			Allows manual sizing via custom_viewport settings.
