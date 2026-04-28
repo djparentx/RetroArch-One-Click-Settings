@@ -87,6 +87,13 @@ printf "Done.\n" > "$CURR_TTY"
 
 sleep 1
 
+# menu_driver values
+# ------------------
+# ozone
+# glui
+# rgui
+# xmb
+
 # input_menu_toggle_gamepad_combo values
 # --------------------------------------
 # 0: None
