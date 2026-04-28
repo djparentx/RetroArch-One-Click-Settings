@@ -86,3 +86,54 @@ printf "\n------------------------------------\n" > "$CURR_TTY"
 printf "Done.\n" > "$CURR_TTY"
 
 sleep 1
+
+# input_menu_toggle_gamepad_combo values
+# --------------------------------------
+# 0: None
+# 1: Down + Y + L1 + R1
+# 2: L3 + R3
+# 3: L1 + R1 + Start + Select
+# 4: Start + Select
+# 5: L3 + R1
+# 6: L1 + R1
+# 7: Hold Start (2 seconds)
+# 8: Hold Select (2 seconds)
+# 9: Down + Select
+# 10: L2 + R2
+
+# input_exit_emulator_gamepad_combo
+# ---------------------------------
+# 0: None
+# 1: Down + Y + L1 + R1
+# 2: Start + Select
+# 3: L1 + R1 + Start + Select
+# 4: L3 + R3
+# 5: L3 + R1
+# 6: L1 + R1
+
+# aspect_ratio_index
+# ------------------
+# 0		4:3				Standard full screen for most retro consoles.
+# 1		16:9			Modern widescreen displays.
+# 2		16:10			Common for many PC monitors and handhelds.
+# 3		16:15			Often used for NES (pixel aspect ratio).
+# 4		1:1				Perfect square.
+# 5		2:1				Extra wide.
+# 6		3:2				Native ratio for GBA and some handheld screens.
+# 7		3:4				TATE/Portrait mode for arcade games.
+# 8		4:1				Extremely wide.
+# 9		4:4				Alternative square mapping.
+# 10	5:4				Common older LCD monitor ratio.
+# 11	6:5				Alternative NES/SNES ratio.
+# 12	7:9				Vertical arcade orientation.
+# 13	8:3				Ultra-wide.
+# 14	8:7				Original pixel aspect ratio for SNES.
+# 15	19:12			Specialized widescreen variant.
+# 16	19:14			Specialized vertical variant.
+# 17	30:17			Specific wide format.
+# 18	32:9			Super ultra-wide monitors.
+# 19	10:9			Common Game Boy (DMG) ratio.
+# 20					Config	Uses the float value from video_aspect_ratio.
+# 21	1:1 PAR			Square Pixel aspect ratio.
+# 22	Core Provided	Uses the aspect ratio suggested by the emulator core.
+# 23	Custom			Allows manual sizing via custom_viewport settings.
