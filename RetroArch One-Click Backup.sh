@@ -100,6 +100,7 @@ export TERM=linux
 # =======================================================
 # Variables
 # =======================================================
+ZIP_DIR="/roms/backup/RetroArch_Backup.zip"
 RETRO32_DIR="/home/ark/.config/retroarch32"
 RETRO64_DIR="/home/ark/.config/retroarch"
 BACKUP_DIR="/roms/backup/RetroArch"
@@ -128,7 +129,7 @@ T_NO_MSG="Nothing to Restore"
 T_REST_TITLE="Restoration Successful"
 T_REST_MSG="RetroArch settings have been restored."
 T_BACKUP_TITLE="Backup Successful"
-T_BACKUP_MSG="RetroArch settings have been backed up to /roms/backup/RetroArch."
+T_BACKUP_MSG="RetroArch settings have been backed up to:\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Please wait..."
 
 # --- FRANÇAIS (FR) --- 
@@ -147,7 +148,7 @@ T_NO_MSG="Rien a restaurer"
 T_REST_TITLE="Restauration reussie"
 T_REST_MSG="Les parametres RetroArch ont ete restaures."
 T_BACKUP_TITLE="Sauvegarde reussie"
-T_BACKUP_MSG="Les parametres RetroArch ont ete sauvegardes dans /roms/backup/RetroArch."
+T_BACKUP_MSG="Les parametres RetroArch ont ete sauvegardes dans :\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Veuillez patienter..."
 
 # --- ESPAÑOL (ES) ---
@@ -166,7 +167,7 @@ T_NO_MSG="Nada que restaurar"
 T_REST_TITLE="Restauracion completada"
 T_REST_MSG="La configuracion de RetroArch ha sido restaurada."
 T_BACKUP_TITLE="Copia completada"
-T_BACKUP_MSG="La configuracion de RetroArch se ha guardado en /roms/backup/RetroArch."
+T_BACKUP_MSG="La configuracion de RetroArch se ha guardado en:\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Por favor espere..."
 
 # --- PORTUGUÊS (PT) ---
@@ -185,7 +186,7 @@ T_NO_MSG="Nada para restaurar"
 T_REST_TITLE="Restauracao concluida"
 T_REST_MSG="As configuracoes do RetroArch foram restauradas."
 T_BACKUP_TITLE="Backup concluido"
-T_BACKUP_MSG="As configuracoes do RetroArch foram salvas em /roms/backup/RetroArch."
+T_BACKUP_MSG="As configuracoes do RetroArch foram salvas em:\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Por favor aguarde..."
 
 # --- ITALIANO (IT) ---
@@ -204,7 +205,7 @@ T_NO_MSG="Niente da ripristinare"
 T_REST_TITLE="Ripristino completato"
 T_REST_MSG="Le impostazioni di RetroArch sono state ripristinate."
 T_BACKUP_TITLE="Backup completato"
-T_BACKUP_MSG="Le impostazioni di RetroArch sono state salvate in /roms/backup/RetroArch."
+T_BACKUP_MSG="Le impostazioni di RetroArch sono state salvate in:\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Attendere..."
 
 # --- DEUTSCH (DE) ---
@@ -223,7 +224,7 @@ T_NO_MSG="Nichts zum Wiederherstellen"
 T_REST_TITLE="Wiederherstellung erfolgreich"
 T_REST_MSG="RetroArch Einstellungen wurden wiederhergestellt."
 T_BACKUP_TITLE="Backup erfolgreich"
-T_BACKUP_MSG="RetroArch Einstellungen wurden nach /roms/backup/RetroArch gesichert."
+T_BACKUP_MSG="RetroArch Einstellungen wurden nach:\n/roms/backup/RetroArch_Backup.zip gesichert."
 T_WAIT="Bitte warten..."
 
 # --- POLSKI (PL) ---
@@ -242,7 +243,7 @@ T_NO_MSG="Nic do przywrocenia"
 T_REST_TITLE="Przywracanie zakonczone"
 T_REST_MSG="Ustawienia RetroArch zostaly przywrocone."
 T_BACKUP_TITLE="Kopia wykonana"
-T_BACKUP_MSG="Ustawienia RetroArch zapisano w /roms/backup/RetroArch."
+T_BACKUP_MSG="Ustawienia RetroArch zapisano w:\n/roms/backup/RetroArch_Backup.zip."
 T_WAIT="Prosze czekac..."
 fi
 
@@ -362,7 +363,7 @@ OneClick() {
 # Restore RetroArch Settings
 # =======================================================
 Restore() {
-	if [[ ! -f "$BACKUP_DIR/retroarch.bak" || ! -f "$BACKUP_DIR/retroarch32.bak" ]]; then
+	if [[ ! -f "$ZIP_DIR" ]]; then
 		dialog --backtitle "T_BACKTITLE" \
 			   --title "$T_NO_TITLE" \
 			   --msgbox "$T_NO_MSG" \
@@ -371,7 +372,9 @@ Restore() {
 	fi
 	
 	dialog --backtitle "$T_BACKTITLE" --infobox "\n    $T_WAIT" 5 40 2>&1 > "$CURR_TTY"
-
+	
+	unzip -q "$ZIP_DIR" -d /roms/backup
+	
 	cp -a "$BACKUP_DIR/retroarch.bak" "$RETRO64_DIR/retroarch.cfg"
 	cp -a "$BACKUP_DIR/retroarch32.bak" "$RETRO32_DIR/retroarch.cfg"
 	cp -a "$BACKUP_DIR/retroarch-core-options.bak" "$RETRO64_DIR/retroarch-core-options.cfg"
@@ -384,6 +387,11 @@ Restore() {
 	cp -a "$BACKUP_DIR/states/." "$RETRO64_DIR/states/"
 	cp -a "$BACKUP_DIR/states32/." "$RETRO32_DIR/states/"
 	
+	rm -rf "$BACKUP_DIR"
+	
+	chown -R ark:ark "$RETRO32_DIR"
+	chown -R ark:ark "$RETRO64_DIR"
+	
 	dialog --backtitle "$T_BACKTITLE" \
 		   --title "$T_REST_TITLE" \
 		   --msgbox "$T_REST_MSG" \
@@ -395,8 +403,11 @@ Restore() {
 # =======================================================
 Backup() {
 	dialog --backtitle "$T_BACKTITLE" --infobox "\n    $T_WAIT" 5 40 2>&1 > "$CURR_TTY"
-
-	mkdir -p "$BACKUP_DIR/config" \
+	
+	rm -f "$ZIP_DIR"
+	
+	mkdir -p "$BACKUP_DIR" \
+			 "$BACKUP_DIR/config" \
 			 "$BACKUP_DIR/config32" \
 			 "$BACKUP_DIR/saves" \
 			 "$BACKUP_DIR/saves32" \
@@ -422,10 +433,17 @@ Backup() {
 	cp -a "$RETRO64_DIR/states/." "$BACKUP_DIR/states/"
 	cp -a "$RETRO32_DIR/states/." "$BACKUP_DIR/states32/"
 	
+(
+    cd /roms/backup || return
+    zip -rq "RetroArch_Backup.zip" "RetroArch" || return
+)
+	
+	rm -rf "$BACKUP_DIR"
+	
 	dialog --backtitle "$T_BACKTITLE" \
 		   --title "$T_BACKUP_TITLE" \
 		   --msgbox "$T_BACKUP_MSG" \
-		   7 40 2>&1 > "$CURR_TTY"
+		   8 45 2>&1 > "$CURR_TTY"
 }
 
 # =======================================================
@@ -481,7 +499,5 @@ Start_GPTKeyb
 printf "\033[H\033[2J" > "$CURR_TTY"
 dialog --clear
 trap 'Exit_Menu' EXIT
-
-mkdir -p "$BACKUP_DIR"
 
 Main_Menu
