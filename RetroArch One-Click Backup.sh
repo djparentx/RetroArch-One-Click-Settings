@@ -100,13 +100,14 @@ export TERM=linux
 # =======================================================
 # Variables
 # =======================================================
-ZIP_DIR="/roms/backup/RetroArch_Backup.zip"
-RETRO32_DIR="/home/ark/.config/retroarch32"
-RETRO64_DIR="/home/ark/.config/retroarch"
-BACKUP_DIR="/roms/backup/RetroArch"
-TMP_KEYS="/tmp/keys.gptk.$$"
-CURR_TTY="/dev/tty1"
 GPTOKEYB_PID=""
+CURR_TTY="/dev/tty1"
+BASE_DIR="/roms/backup"
+TMP_KEYS="/tmp/keys.gptk.$$"
+BACKUP_DIR="$BASE_DIR/RetroArch"
+ZIP_DIR="$BASE_DIR/RetroArch_Backup.zip"
+RETRO64_DIR="/home/ark/.config/retroarch"
+RETRO32_DIR="/home/ark/.config/retroarch32"
 
 if [ -f "$ES_CONF" ]; then
     ES_DETECTED=$(grep "name=\"Language\"" "$ES_CONF" | grep -o 'value="[^"]*"' | cut -d '"' -f 2)
@@ -373,7 +374,7 @@ Restore() {
 	
 	dialog --backtitle "$T_BACKTITLE" --infobox "\n    $T_WAIT" 5 40 2>&1 > "$CURR_TTY"
 	
-	unzip -q "$ZIP_DIR" -d /roms/backup
+	unzip -q "$ZIP_DIR" -d "$BASE_DIR"
 	
 	cp -a "$BACKUP_DIR/retroarch.bak" "$RETRO64_DIR/retroarch.cfg"
 	cp -a "$BACKUP_DIR/retroarch32.bak" "$RETRO32_DIR/retroarch.cfg"
@@ -434,7 +435,7 @@ Backup() {
 	cp -a "$RETRO32_DIR/states/." "$BACKUP_DIR/states32/"
 	
 (
-    cd /roms/backup || return
+    cd "$BASE_DIR" || return
     zip -rq "RetroArch_Backup.zip" "RetroArch" || return
 )
 	
