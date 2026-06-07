@@ -70,8 +70,8 @@ declare -A SETTINGS=(
     [savestate_auto_load]="true"
     [aspect_ratio_index]="22"
     [menu_driver]="ozone"
-    [input_menu_toggle_gamepad_combo]="9"
-    [input_exit_emulator_gamepad_combo]="2"
+    [input_menu_toggle_gamepad_combo]="8"
+    [input_quit_gamepad_combo]="4"
     [video_frame_delay_auto]="true"
 )
 
@@ -94,7 +94,7 @@ sleep 1
 # rgui
 # xmb
 
-# input_menu_toggle_gamepad_combo values
+# gamepad_combo values
 # --------------------------------------
 # 0: None
 # 1: Down + Y + L1 + R1
@@ -107,16 +107,6 @@ sleep 1
 # 8: Hold Select (2 seconds)
 # 9: Down + Select
 # 10: L2 + R2
-
-# input_exit_emulator_gamepad_combo
-# ---------------------------------
-# 0: None
-# 1: Down + Y + L1 + R1
-# 2: Start + Select
-# 3: L1 + R1 + Start + Select
-# 4: L3 + R3
-# 5: L3 + R1
-# 6: L1 + R1
 
 # aspect_ratio_index
 # ------------------
