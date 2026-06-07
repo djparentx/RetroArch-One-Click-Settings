@@ -60,7 +60,7 @@ It modifies both standard and 32-bit RetroArch configuration files in a single r
 ### UI & Controls
 
 - Menu driver set to: Ozone  
-- Menu toggle gamepad combo: Down + Select  
+- Menu toggle gamepad combo: Hold Select for 2 Seconds  
 - Exit emulator combo: Select + Start  
 
 ---
